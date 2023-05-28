@@ -25,7 +25,7 @@ If all assertions pass, then your solution will be accepted.
  
 
 Example 1:
-
+// these are following the constraints 
 Input: nums = [3,2,2,3], val = 3
 Output: 2, nums = [2,2,_,_]
 Explanation: Your function should return k = 2, with the first two elements of nums being 2.
