@@ -9,7 +9,7 @@ Example 2:
 
 Input: nums = [1,3,5,6], target = 2
 Output: 1
-  
+//   this is code of brute force as well as optimized one 
 Code -> 
   class Solution {
     public int searchInsert(int[] nums, int target) {
