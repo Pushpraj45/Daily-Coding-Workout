@@ -8,9 +8,7 @@
 //             while(j<n && chars[i]==chars[j]){
 //                 j++;
 //             }
-// //             whole traversing is done
-// //             or founded a different character 
-            
+// //             
 // //             old char ko store karlo 
 //             chars[ansIndex++]=chars[i];
             
