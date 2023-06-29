@@ -11,9 +11,8 @@ class Solution {
         */
 
         Arrays.sort(boxTypes, (a,b) -> b[1]-a[1]);
-
         int ans = 0;
-        int boxes = 0;
+        int boxes = 0; // Count to get till now how many boxes have been selected 
 
         for(int i=0; i<boxTypes.length; i++){
             if(boxes+boxTypes[i][0]<=truckSize){
@@ -26,6 +25,10 @@ class Solution {
             }
         }
         return ans;
+
+        
+
+
 
 
     }
