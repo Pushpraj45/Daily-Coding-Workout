@@ -7,6 +7,7 @@ class Solution {
                     return true;
                 }
             }
+            // Hii
             map.put(nums[i],i);
         }
         return false;
