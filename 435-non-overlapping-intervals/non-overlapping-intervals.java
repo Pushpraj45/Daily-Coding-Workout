@@ -8,7 +8,7 @@ class Solution {
        for(int i=1; i<n; i++){
            int start=intervals[i][0];
            if(start<end){
-               ans++;
+               ans++; 
            }
            else{
                end=intervals[i][1];
@@ -16,4 +16,5 @@ class Solution {
        }
        return ans;
     }
+    
 }
