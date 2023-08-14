@@ -7,6 +7,7 @@ class Solution {
                 arr.add(i);
             }
         }
+        // declaration  
         int ans=0;
         for(int i=0; i<arr.size(); i++){
             ans+=arr.get(i);
