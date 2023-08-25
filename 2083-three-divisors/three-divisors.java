@@ -18,7 +18,7 @@ class Solution {
 
 /*
 n is not a perfect square? Return False.
-n is a perfect square? Okay, what about sqrt(n)?
+n is a perfect square? Okay, what about sqrt(n)
 sqrt(n) is a prime number - return True.
 sqrt(n) is not a prime number - return False.
 */
