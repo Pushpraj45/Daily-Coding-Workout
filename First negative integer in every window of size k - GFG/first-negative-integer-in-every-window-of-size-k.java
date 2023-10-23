@@ -45,44 +45,40 @@ class GFG {
 
 class Compute {
     
-    public long[] printFirstNegativeInteger(long arr[], int n, int k)
+    public long[] printFirstNegativeInteger(long A[], int N, int K)
     {
-         int i = n-1 , j = n-1;
-        long[] ans = new long[n-k+1];
-        int len = ans.length-1;
-        pair pr = new pair(0,j);
-
-        while(j >= 0){
-            if(arr[j] < 0){
-                pr.val = arr[j];
-                pr.key = j;
+        ArrayList<Long> arr = new ArrayList<>();
+        
+        int i=0,j = 0;
+        Queue<Long> que = new LinkedList<>();
+        
+        while(j<N){
+            if(A[j]<0){
+                que.add(A[j]);
             }
-
-            if(i-j+1 == k){
-                ans[len] = pr.val;
-                i--;
-                j--;
-                len--;
-            }else{
-                j--;
+            if(j-i+1<K){
+                j++;
             }
-
-            if(pr.key > i){
-                pr.val = 0;
-                pr.key = j;
+            else if(j-i+1==K){
+                if(que.isEmpty()){
+                    arr.add(0L);
+                }
+                else {
+                    arr.add(que.peek());
+                    if(A[i] == que.peek()){
+                        que.remove();
+                    }
+                  
+                }
+                  i++;
+                    j++;
             }
         }
-
-        return ans;
+        
+        long[] ans = new long[N-K+1];
+        for(int l=0; l<arr.size(); l++){
+            ans[l] = arr.get(l);
+        }
+        return ans; 
     }
 }
-public class pair {
-    public long val;
-    public int key;
-
-    public pair(long val, int key) {
-        this.val = val;
-        this.key = key;
-    }
-}
-    
