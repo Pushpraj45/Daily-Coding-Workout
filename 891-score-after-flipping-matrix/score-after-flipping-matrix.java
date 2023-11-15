@@ -6,53 +6,66 @@ class Solution {
         // One function to toggle columns whenever we get 0's count > 1's count will toggle the column
         // after flipping the values we will convert binary numbers into decimal and return the answer
 
-        int res = 0, rows = grid.length, cols = grid[0].length;
-        // Row logic
-        for (int i = 0; i < rows; i++) {
-            if (grid[i][0] == 0) {
-                flip_row(i, grid, cols);
+       int ans = 0;
+       int row = grid.length;
+       int col = grid[0].length; 
+
+       for(int i=0; i<row; i++){
+           if(grid[i][0]==0){
+               toggleRow(grid, i);
+           }
+       }
+
+       for(int i=0; i<col; i++){
+           int a=0, b=0;
+           for(int j=0; j<row; j++){
+               if(grid[j][i]==1){ // As we are checking for columns so 
+                   a++;
+               }
+               else{
+                   b++;
+               }
+           }
+
+           if(a<b){
+               toggleCol(grid, i);
+           }
+       }
+
+       for(int i=0; i<grid.length; i++){
+           ans+=bintodec(grid[i]);
+       }
+       return ans;
+    }
+
+    public void toggleRow(int[][] grid, int row){
+        for(int i=0; i<grid[0].length; i++){
+            if(grid[row][i] == 1){
+                grid[row][i]=0;
+            }
+            else{
+                grid[row][i] = 1;
             }
         }
-
-        // Column logic
-        for (int c = 0; c < cols; c++) {
-            // Get count of 0s' & 1s' in a column
-            int zeroc = 0, onec = 0;
-            for (int r = 0; r < rows; r++) {
-                if (grid[r][c] == 0) zeroc++; else onec++;
+    } 
+    public void toggleCol(int[][] grid, int col){
+        for(int i=0; i<grid.length; i++){
+            if(grid[i][col] == 1){
+                grid[i][col]=0;
             }
-
-            if (zeroc > onec) {
-                flip_col(c, grid, rows);
+            else{
+                grid[i][col] = 1;
             }
         }
-
-        // Get binary strings for extracting values
-        int score = 0;
-        for (int i = 0; i < rows; i++) {
-            score += binaryToDecimal(grid[i]);
+    }
+    public int bintodec(int[] arr){
+        int dec = 0;
+        for(int i=0; i<arr.length; i++){
+            dec = dec*2+arr[i];
         }
 
-        return score;
+        return dec; 
     }
+    
 
-    private int binaryToDecimal(int[] binaryArray) {
-        int decimal = 0;
-        for (int i = 0; i < binaryArray.length; i++) {
-            decimal = decimal * 2 + binaryArray[i];
-        }
-        return decimal;
-    }
-
-    public static void flip_row(int r, int[][] grid, int col) {
-        for (int i = 0; i < col; i++) {
-            if (grid[r][i] == 1) grid[r][i] = 0; else grid[r][i] = 1;
-        }
-    }
-
-    public static void flip_col(int c, int[][] grid, int rows) {
-        for (int i = 0; i < rows; i++) {
-            if (grid[i][c] == 0) grid[i][c] = 1; else grid[i][c] = 0;
-        }
-    }
 }
