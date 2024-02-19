@@ -10,7 +10,7 @@ public class Solution {
         return false;
     }
     
-    Approach - 2*/
+    Approach - 2
      
         if (n == 0) return false;
         
@@ -21,4 +21,9 @@ public class Solution {
         }
         return false;
     }
+    */
+    if (n <= 0) return false;
+        if (n == 1) return true;
+        return (n % 2 == 0) && isPowerOfTwo(n / 2);
+        }
 }
