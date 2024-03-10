@@ -1,5 +1,6 @@
 class Solution {
     public String minWindow(String s, String t) {
+        /*
         String ans = "";
         int i=0, j=0;
         int min = Integer.MAX_VALUE;
@@ -11,7 +12,7 @@ class Solution {
         }
         int count = map.size();
 
-        while(j<s.length()){
+        while(j<s.length()){ 
             char c = s.charAt(j);
             if(!map.containsKey(c)){
                 // Hame key nahi mili to j ko increment kar diya 
@@ -56,6 +57,61 @@ class Solution {
             }
             j++;
         }
-        return ans; 
+        return ans;
+        */
+       int start = 0;
+       int end = 0;
+       int min = Integer.MAX_VALUE;
+       String ans="";
+       HashMap<Character, Integer> map = new HashMap<>();
+       for(int k=0; k<t.length(); k++){
+           char c = t.charAt(k);
+           map.put(c,map.getOrDefault(c,0)+1);
+       }
+
+       int count = map.size();
+
+       while(end<s.length()){
+           char c = s.charAt(end);
+           if(!map.containsKey(c)){
+               end++;
+               continue;
+           }
+           else if(map.containsKey(c)){
+               map.put(c,map.get(c)-1);
+
+               if(map.get(c)==0){
+                   count--; // char khatam to count decrement
+               }
+           }
+           if(count==0){
+               if(min>end-start+1){
+                   ans = s.substring(start,end+1);
+                   min = Math.min(min,end-start+1);
+               }
+               while(count==0){
+                   char c1 = s.charAt(start);
+                   if(!map.containsKey(c1)){
+                       start++;
+                   }
+                   else{
+                       map.put(c1,map.get(c1)+1);
+                       if(map.get(c1)>0){
+                           count++;
+                       }
+                       start++;
+                   }
+
+                   if(count==0){
+                       if(min>end-start+1){
+                           ans = s.substring(start,end+1);
+                           min = end-start+1;
+                       }
+                   }
+               }
+           }
+           end++;
+       }
+       return ans;
     }
 }
