@@ -4,7 +4,7 @@ class Solution{
 
         //main
         for(int i=index;i<nums.length;i++){
-            if(i!=index && nums[i]==nums[i-1]) continue;
+            if(i>index && nums[i]==nums[i-1]) continue;
             ds.add(nums[i]);
             printsubsetsum2(i+1,nums,ans,ds);
             ds.remove(ds.size()-1);
