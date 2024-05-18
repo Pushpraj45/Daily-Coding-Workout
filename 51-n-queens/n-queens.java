@@ -29,10 +29,7 @@ class Solution {
 
     solve(0,ans,res,leftrow,lower,upper);
     return res;
-
-
-
-
+ 
 
     }
 
