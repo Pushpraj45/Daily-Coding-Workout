@@ -43,18 +43,35 @@ class Solution {
         // Arrays.sort(arr2);
         // return lcs(arr1, arr2);
         int n = arr.length;
-         int dp[][] = new int[n+1][n+1];
-        for(int index = n-1; index>=0; index--){
-            for(int previndex=index-1; previndex>=-1; previndex--){
-                int nottake = 0+dp[index+1][previndex+1];
-                int take = 0;
-                if(previndex==-1 || arr[index]>arr[previndex]){
-                     take = 1+dp[index+1][index+1];
-                }
-                dp[index][previndex+1] = Math.max(nottake, take);
+        //  int dp[][] = new int[n+1][n+1];
+        // for(int index = n-1; index>=0; index--){
+        //     for(int previndex=index-1; previndex>=-1; previndex--){
+        //         int nottake = 0+dp[index+1][previndex+1];
+        //         int take = 0;
+        //         if(previndex==-1 || arr[index]>arr[previndex]){
+        //              take = 1+dp[index+1][index+1];
+        //         }
+        //         dp[index][previndex+1] = Math.max(nottake, take);
+        //     }
+        // }
+
+        // return dp[0][0]; 
+
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1); // LIS ek to hoga hi minimum 
+
+        for(int i=0; i<=n-1; i++){
+            for(int previndex=0; previndex<=i-1; previndex++){
+                if(arr[previndex]<arr[i]){
+                    dp[i] = Math.max(dp[i], 1+dp[previndex]);                }
             }
         }
 
-        return dp[0][0]; 
+        int ans  = -1;
+        for(int i=0; i<=n-1; i++){
+            ans = Math.max(ans, dp[i]);
+        }
+
+        return ans;
     }
 }
