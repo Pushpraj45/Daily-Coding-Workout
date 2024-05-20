@@ -28,19 +28,33 @@ class Solution {
         }
         return dp[n][m];
     }
-    public int lengthOfLIS(int[] arr1) {
-        HashSet<Integer> set=new HashSet<>();
-        for (int i=0; i<arr1.length; i++){
-            set.add(arr1[i]);
+    public int lengthOfLIS(int[] arr) {
+        // HashSet<Integer> set=new HashSet<>();
+        // for (int i=0; i<arr1.length; i++){
+        //     set.add(arr1[i]);
+        // }
+
+        // int arr2[]=new int[set.size()];  // sorted unique elements
+        // int i=0;
+        // for (int num : set){
+        //     arr2[i]=num;
+        //     i++;
+        // }
+        // Arrays.sort(arr2);
+        // return lcs(arr1, arr2);
+        int n = arr.length;
+         int dp[][] = new int[n+1][n+1];
+        for(int index = n-1; index>=0; index--){
+            for(int previndex=index-1; previndex>=-1; previndex--){
+                int nottake = 0+dp[index+1][previndex+1];
+                int take = 0;
+                if(previndex==-1 || arr[index]>arr[previndex]){
+                     take = 1+dp[index+1][index+1];
+                }
+                dp[index][previndex+1] = Math.max(nottake, take);
+            }
         }
 
-        int arr2[]=new int[set.size()];  // sorted unique elements
-        int i=0;
-        for (int num : set){
-            arr2[i]=num;
-            i++;
-        }
-        Arrays.sort(arr2);
-        return lcs(arr1, arr2);
+        return dp[0][0]; 
     }
 }
