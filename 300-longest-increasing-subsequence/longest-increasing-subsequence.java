@@ -57,21 +57,44 @@ class Solution {
 
         // return dp[0][0]; 
 
-        int[] dp = new int[n];
-        Arrays.fill(dp, 1); // LIS ek to hoga hi minimum 
+        // int[] dp = new int[n];
+        // Arrays.fill(dp, 1); // LIS ek to hoga hi minimum 
 
-        for(int i=0; i<=n-1; i++){
-            for(int previndex=0; previndex<=i-1; previndex++){
-                if(arr[previndex]<arr[i]){
-                    dp[i] = Math.max(dp[i], 1+dp[previndex]);                }
+        // for(int i=0; i<=n-1; i++){
+        //     for(int previndex=0; previndex<=i-1; previndex++){
+        //         if(arr[previndex]<arr[i]){
+        //             dp[i] = Math.max(dp[i], 1+dp[previndex]);                }
+        //     }
+        // }
+
+        // int ans  = -1;
+        // for(int i=0; i<=n-1; i++){
+        //     ans = Math.max(ans, dp[i]);
+        // }
+
+        // return ans;
+
+         List<Integer> temp = new ArrayList<Integer>();
+
+        temp.add(arr[0]);
+        int len = 1;
+        for(int i=1; i<n; i++){
+            if(arr[i]>temp.get(temp.size()-1)){
+                temp.add(arr[i]);
+                len++;
+            }
+            else{
+                // Replacement Step
+                int index = Collections.binarySearch(temp,arr[i]);
+                // if negative index then find it's accurate index
+                if(index<0){
+                    index = -index-1;
+                }
+
+                temp.set(index, arr[i]); // element ko vaha par dal diya 
             }
         }
 
-        int ans  = -1;
-        for(int i=0; i<=n-1; i++){
-            ans = Math.max(ans, dp[i]);
-        }
-
-        return ans;
+        return len; 
     }
 }
