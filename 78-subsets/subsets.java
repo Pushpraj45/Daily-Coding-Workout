@@ -16,4 +16,6 @@ class Solution {
         ds.remove(ds.size()-1);
         getsubsets(i+1,arr,ds,ans); // Not pick
     }
+
+    
 }
