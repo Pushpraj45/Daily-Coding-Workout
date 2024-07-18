@@ -1,25 +1,24 @@
 class Solution {
     public int minOperations(int[] nums) {
-        int n = nums.length;
-        int i = 0, j = 2, ans = 0;
-        
-        while (j < n) {
+        int n = nums.length, res = 0;
+        for (int i = 0; i < n - 2; i++) {
             if (nums[i] == 0) {
-                ans++;
-                for (int k = i; k < i + 3; k++) {
-                    nums[k] = (nums[k] == 0) ? 1 : 0;
+                if (nums[i + 1] == 0) {
+                    nums[i + 1] = 1;
+                } else {
+                    nums[i + 1] = 0;
                 }
-            }
-            i++;
-            j++;
-        }
-        
-        for (int m = 0; m < n; m++) {
-            if (nums[m] == 0) {
-                return -1;
+                if (nums[i + 2] == 0) {
+                    nums[i + 2] = 1;
+                } else {
+                    nums[i + 2] = 0;
+                }
+                res++;
             }
         }
-        
-        return ans;
+        if (nums[n - 2] == 0 || nums[n - 1] == 0) {
+            return -1;
+        }
+        return res;
     }
 }
