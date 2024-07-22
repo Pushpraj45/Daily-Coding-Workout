@@ -18,9 +18,9 @@ class Solution {
         int ans = arr.length;
         // Iterate over the range of jumps possible from the current index
         for (int i = 1; i <= arr[index]; i++) {
-            if (index + i < arr.length) {
+            // if (index + i < arr.length) {
                 ans = Math.min(ans, 1 + helperr(arr, index + i, memo));
-            }
+            // }
         }
 
         // Store the result in memo array
