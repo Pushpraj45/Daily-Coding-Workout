@@ -15,8 +15,9 @@ class Solution {
                 // Build the substring inside the brackets
                 StringBuilder temp = new StringBuilder();
                 while (!stringStack.peek().equals("[")) {
-                    temp.insert(0, stringStack.pop()); // Construct the string in reverse
+                    temp.append(stringStack.pop()); // Construct the string in reverse
                 }
+                temp.reverse();
                 stringStack.pop(); // Remove '['
 
                 // Repeat the substring as per the multiplier
@@ -25,6 +26,7 @@ class Solution {
                 for (int i = 0; i < count; i++) {
                     replacement.append(temp); // Append substring 'count' times
                 }
+                replacement.reverse();
 
                 stringStack.push(replacement.toString()); // Push the new string to the stack
             } else {
@@ -36,9 +38,10 @@ class Solution {
         // Build the final result from the stack
         StringBuilder result = new StringBuilder();
         while (!stringStack.isEmpty()) {
-            result.insert(0, stringStack.pop()); // Construct the final string
+            result.append(stringStack.pop());
+             // Construct the final string
         }
-        return result.toString();
+        return result.reverse().toString();
     }
         
 }
