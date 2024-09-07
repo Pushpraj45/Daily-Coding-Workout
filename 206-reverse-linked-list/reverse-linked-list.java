@@ -9,19 +9,21 @@
  * }
  */
 class Solution {
-    public static ListNode head;
-    public static ListNode tail;
     public ListNode reverseList(ListNode head) {
-        ListNode prev=null;
-        ListNode curr=tail=head; // Right to left assignment in java
-        ListNode next;   // 3 variables 4 steps
-        while (curr!=null){
-            next=curr.next;
-            curr.next=prev;
-            prev=curr;
-            curr=next;
+        ListNode temp = head;
+        Stack<Integer>st = new Stack<>();
+        while(temp!=null){
+            st.push(temp.val);
+            temp = temp.next;
         }
-        head=prev;
-        return prev;
+
+        temp = head;
+        while(temp!=null){
+            temp.val = st.pop();
+            temp = temp.next;
+        }
+
+        // Now head contains the value of head of new pointer
+        return head;
     }
 }
