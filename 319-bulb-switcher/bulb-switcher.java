@@ -1,29 +1,25 @@
 class Solution {
-    public int bulbSwitch(int x) {
+    public int bulbSwitch(int N) {
         // return (int)Math.sqrt(n);
-         if (x < 0)
-           // Handle negative numbers
-            return -1;
-        if (x == 0 || x == 1)
-           // The square root of 0 is 0, and the square root of 1 is 1.
-            return x;
+        if (N <= 0) return 0; // Edge case for non-positive N
 
-        // Calculate the floating-point square root using Math.exp and Math.log
-        double sqrtApprox = Math.exp(Math.log(x) / 2);
-
-        // Round the result to the nearest integer
-        int floorResult = (int) Math.floor(sqrtApprox);
-
-        // Verify if the result is indeed correct
-        if (floorResult * floorResult == x) {
-            return floorResult;
+        // Approximate the integer square root using bit manipulation
+        int result = 0;
+        int bit = 1 << 30; // The highest power of 2 less than the maximum integer value
+        
+        // Find the highest bit set in sqrt(N)
+        while (bit > N) bit >>= 2;
+        
+        // Approximate integer square root
+        while (bit != 0) {
+            if (N >= result + bit) {
+                N -= result + bit;
+                result += bit << 1;
+            }
+            result >>= 1;
+            bit >>= 2;
         }
-
-        // Check if incrementing the floor result gives the correct square root
-        if ((floorResult + 1) * (floorResult + 1) == x) {
-            return floorResult + 1;
-        }
-
-        return floorResult;
+        
+        return result;
     }
 }
